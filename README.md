@@ -8,7 +8,7 @@ tags: opengl vision 高斯模糊
 
 - 流程图
 
-<img src="/Users/justinyang/Library/Application Support/typora-user-images/image-20210425164704525.png" alt="image-20210425164704525" style="zoom:50%;" />
+<img src="https://lifestyle1.cn/Resource/Image/FaceMosaic/image-20210425164704525.png" alt="image-20210425164704525" style="zoom:50%;" />
 
 - 初始化视频输入流
 
@@ -95,7 +95,7 @@ tags: opengl vision 高斯模糊
 
   - 二维高斯函数
 
-    <img src="/Users/justinyang/Library/Application Support/typora-user-images/image-20210425172807142.png" alt="image-20210425172807142" style="zoom:30%;" />
+    <img src="https://lifestyle1.cn/Resource/Image/FaceMosaic/image-20210425172807142.png" alt="image-20210425172807142" style="zoom:30%;" />
 
     x,y表示像素点的坐标，G则是该像素的权重；从下图可以看出σ的值越大，周围的像素权重越高，可通过matlab([线上matlab](https://octave-online.net/))来验证
 
@@ -121,7 +121,7 @@ tags: opengl vision 高斯模糊
     title('σ=8');
     ```
 
-    <img src="/Users/justinyang/Library/Application Support/typora-user-images/image-20210425180301516.png" alt="image-20210425180301516" style="zoom:60%;" />
+    <img src="https://lifestyle1.cn/Resource/Image/FaceMosaic/image-20210425180301516.png" alt="image-20210425180301516" style="zoom:60%;" />
 
 模糊半径为2的像素坐标
 
@@ -129,13 +129,13 @@ tags: opengl vision 高斯模糊
 
 
 
-<img src="/Users/justinyang/Library/Application Support/typora-user-images/image-20210425181756454.png" alt="image-20210425181756454" style="zoom:60%;" /> 对应的权重是<img src="/Users/justinyang/Library/Application Support/typora-user-images/image-20210425190135982.png" alt="image-20210425190135982" style="zoom:50%;" />
+<img src="https://lifestyle1.cn/Resource/Image/FaceMosaic/image-20210425181756454.png" alt="image-20210425181756454" style="zoom:60%;" /> 对应的权重是<img src="https://lifestyle1.cn/Resource/Image/FaceMosaic/image-20210425190135982.png" alt="image-20210425190135982" style="zoom:50%;" />
 
 >σ选的是1且是归一化的权重(将G(x,y)/∑G(x,y))；将每个位置的与对应的权重相乘，再相加，则为像素点(0,0)的高斯模糊后的值；此种计算方法，对于一张w\*h分辨率的图要进行 w\* h\*(radius*2+1)<sup>2</sup>计算
 
   - 计算高斯模糊简化方法：先进行X轴高斯模糊，再进行Y轴高斯模糊
 
-  <img src="/Users/justinyang/Library/Application Support/typora-user-images/image-20210425192133241.png" alt="image-20210425192133241" style="zoom:50%;" />
+  <img src="https://lifestyle1.cn/Resource/Image/FaceMosaic/image-20210425192133241.png" alt="image-20210425192133241" style="zoom:50%;" />
 
   将每个像素以x轴的权重进行高斯模糊 C<sub>(0,0)</sub> = 0.0545\*C<sub>(-2,0)</sub> +  0.2442\*C<sub>(-1,0)</sub> +  0.4026\*C<sub>(0,0)</sub> +  0.2442\*C<sub>(1,0)</sub> +  0.0545\*C<sub>(2,0)</sub>
 
