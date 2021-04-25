@@ -157,9 +157,6 @@ tags: opengl vision 高斯模糊
 
 - 将脸部矩形框数据传入shader,并渲染到FBO呈现在屏幕上
 
-  代码参见demo
+  [代码参见demo](https://github.com/JustinYangJing/FaceMosaic.git)
 
   
-
-  
-
