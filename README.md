@@ -14,7 +14,6 @@ tags: opengl vision 高斯模糊
 
   ```swift
   func setupVideo() {
-          let session = AVCaptureSession()
           session.sessionPreset = .hd1280x720
           
           if let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
@@ -39,18 +38,13 @@ tags: opengl vision 高斯模糊
               con.isVideoMirrored = false
               con.videoOrientation = .portraitUpsideDown
           }
-    		 //必须要有AVCaptureVideoPreviewLayer，并且被强持有，否则视频流不回调
-          self.preLayer = AVCaptureVideoPreviewLayer(session: session)
-          self.preLayer.frame = UIScreen.main.bounds
-          self.preLayer.videoGravity = .resizeAspectFill;
-          self.view.backgroundColor = UIColor.gray
           
           session.startRunning()
       }
   ```
-
   
-
+  
+  
 - 回调函数处理视频流，识别人脸
 
   ```swift
@@ -148,9 +142,9 @@ tags: opengl vision 高斯模糊
   > 根据传入的模糊半径计算好权重, 选择合适的相邻像素的步长得到纹理的偏移数组；**这里要特别注意:对于720*1280的视频数据，按照自己的理解，以当前像素为原点，认为偏移x轴上偏移一像素的步长是1/720, y轴方向偏移一像素的步长是1/1280,这样做以后，高斯模糊的效果很弱(加大模糊半径会加大计算量，半径设置10时已经卡到不能输出视频了)，后面想着赋值纹理的时候是以mipmap的方式映射的，那么在以375宽度的手机尺寸，是否应该用mipmap生成的720\*1280/4 的纹理，将x步长设置为1/360,y的步长设置为1/640,视频的模糊效果还是不理想。 经过测试选择了1/200作为步长，模糊的效果可以达到要求。 有小伙伴对这个步长有研究吗？只偏移一像素时，在转化为偏移的纹理坐标时，这个步长应该是1/720和1/1280吗？**
 >
   > 因输入的纹理数据是ARGB,到shader里面访问时texture(tex,texCoord).rgba对应关系是 r->a, g->r, b->g, a->b
-  
+
   代码参见demo
-  
+
 - 设置opengl相关参数
 
   代码参见demo

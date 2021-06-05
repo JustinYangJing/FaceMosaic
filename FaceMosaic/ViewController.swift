@@ -10,7 +10,9 @@ import AVFoundation
 import Vision
 
 class ViewController: UIViewController {
-    var preLayer:AVCaptureVideoPreviewLayer!
+    lazy var session : AVCaptureSession = {
+        return AVCaptureSession()
+    }()
     lazy var glview : GLView  = {
         var view = GLView(frame: self.view.bounds)
         return view
@@ -41,7 +43,7 @@ class ViewController: UIViewController {
     
     func setupVideo() {
         
-        let session = AVCaptureSession()
+        
         session.sessionPreset = .hd1280x720
         
         if let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
@@ -66,13 +68,7 @@ class ViewController: UIViewController {
             con.videoOrientation = .portraitUpsideDown
         }
         //    kCVPixelFormatType_420YpCbCr8BiPlanarFullRange
-        
-        self.preLayer = AVCaptureVideoPreviewLayer(session: session)
-        
-        self.preLayer.frame = UIScreen.main.bounds
-        
-        self.preLayer.videoGravity = .resizeAspectFill;
-        self.view.backgroundColor = UIColor.gray
+
         
         
         session.startRunning()
